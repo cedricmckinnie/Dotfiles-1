@@ -26,7 +26,6 @@ Bundle "vim-scripts/tComment"
 Bundle "tpope/vim-surround"
 Bundle "mileszs/ack.vim"
 Bundle "rking/ag.vim"
-Bundle "Chun-Yang/vim-action-ag"
 Bundle "tpope/vim-fugitive"
 Bundle "henrik/vim-indexed-search"
 Bundle "tpope/vim-abolish"
@@ -52,9 +51,8 @@ Bundle "marijnh/tern_for_vim"
 Bundle "othree/javascript-libraries-syntax.vim"
 
 Bundle "fatih/vim-go"
-Bundle "python-mode/python-mode"
+Bundle "klen/python-mode"
 Bundle "plasticboy/vim-markdown"
-Bundle "neovimhaskell/haskell-vim"
 
 Bundle "vim-scripts/c.vim"
 Bundle "tpope/vim-fireplace"
@@ -244,7 +242,7 @@ let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
 
 " YouCompleteMe
-let g:ycm_path_to_python_interpreter = '/home/user/.pyenv/shims/python'
+" let g:ycm_path_to_python_interpreter = '/home/user/anaconda3/bin/python'
 let g:ycm_filetype_blacklist = {}
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
@@ -256,8 +254,6 @@ if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-let g:vim_action_ag_escape_chars = '#%.^$*+?()[{\\|'
-
 " reload ctags
 nnoremap <leader>C :!ctags -R --fields=+l --exclude=.git --exclude=log --exclude=tmp *<CR><CR>
 
@@ -267,6 +263,7 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 nnoremap <leader>G mG:Git! 
 nnoremap <leader>g :Git 
+nnoremap <leader>A :!ag 
 nnoremap <leader>a :Ag! 
 
 """"""""""""""""""""""""""""""""
@@ -327,7 +324,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_indent = 1
 
 " linting
-let g:pymode_lint = 0
+let g:pymode_lint = 1
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_message = 1
 let g:pymode_lint_on_write = 1
@@ -342,15 +339,17 @@ let g:pymode_lint_sort = ['E','C']
 " General file runners for various languages
 function! LangRunner()
   if(&ft=="python")
-    nnoremap <leader>r :!python3 %<cr>
-  elseif(&ft=="haskell")
-    nnoremap <leader>r :!ghci %<cr>
+    nnoremap <leader>r :!python %<cr>
   elseif(&ft=="hy")
     nnoremap <leader>r :!hy %<cr>
   elseif(&ft=="clojure")
     nnoremap <leader>r :!lein run<cr>
+  elseif(&ft=="ruby")
+    nnoremap <leader>r :!ruby %<cr>
   elseif(&ft=="javascript")
     nnoremap <leader>r :!node %<cr>
+  elseif(&ft=="php")
+    nnoremap <leader>r :!php %<cr>
   elseif(&ft=="c")
     nnoremap <leader>r :!make run<cr>
   endif
